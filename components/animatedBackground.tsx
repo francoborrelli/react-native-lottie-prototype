@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import LottieView from 'lottie-react-native';
 
 import type { FC } from 'react';
-import type { AnimationType } from '../../pages/Welcome/types';
+import type { AnimationType } from '../pages/Welcome/types';
 
 interface AnimatedBackgroundProps {
   children: any;
