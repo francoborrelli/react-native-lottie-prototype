@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 import { EdgeInsets, useSafeArea } from 'react-native-safe-area-context';
 import { Formik, FormikProps } from 'formik';
 import { Button, Layout, LayoutElement } from '@ui-kitten/components';
@@ -47,18 +47,20 @@ export const SignUpScreen = (props: SignUpScreenProps): LayoutElement => {
         source={require('../../../assets/image-background.jpeg')}
       ></ImageBackground>
       <Layout style={styles.formContainer}>
-        <Formik
-          initialValues={SignUpData.empty()}
-          validationSchema={SignUpSchema}
-          onSubmit={onFormSubmit}
-        >
-          {RenderForm}
-        </Formik>
+        <View>
+          <Formik
+            initialValues={SignUpData.empty()}
+            validationSchema={SignUpSchema}
+            onSubmit={onFormSubmit}
+          >
+            {RenderForm}
+          </Formik>
+        </View>
         <Button
-          style={styles.haveAccountButton}
-          appearance='ghost'
           status='basic'
+          appearance='ghost'
           onPress={navigateSignIn}
+          style={styles.haveAccountButton}
         >
           ¿Ya tenés cuenta?
         </Button>
@@ -73,16 +75,26 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     flex: 1,
+    paddingTop: 25,
+    marginTop: -20,
+    borderRadius: 20,
     paddingVertical: 16,
     paddingHorizontal: 16,
+    borderBottomEndRadius: 0,
+    borderBottomLeftRadius: 0,
+    justifyContent: 'space-between',
   },
   formControl: {
-    marginVertical: 4,
+    borderRadius: 15,
+    marginVertical: 10,
   },
   submitButton: {
+    borderRadius: 15,
     marginVertical: 24,
   },
   haveAccountButton: {
+    width: '100%',
+    borderRadius: 15,
     alignSelf: 'center',
   },
 });

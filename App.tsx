@@ -17,7 +17,6 @@ import {
 } from '@expo-google-fonts/dev';
 import { StatusBar } from 'expo-status-bar';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppNavigator } from './navigation/app.navigator';
 import { AppRoute } from './navigation/app-routes';
 
@@ -42,7 +41,7 @@ export const App: FC = () => {
 
       <ApplicationProvider {...eva} theme={eva.dark}>
         <NavigationContainer>
-          <AppNavigator initialRouteName={false ? AppRoute.AUTH : AppRoute.WELCOME} />
+          <AppNavigator initialRouteName={false ? AppRoute.WELCOME : AppRoute.AUTH} />
         </NavigationContainer>
       </ApplicationProvider>
     </>

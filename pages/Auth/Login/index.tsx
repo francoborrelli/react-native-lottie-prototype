@@ -50,7 +50,12 @@ export const SignInScreen = (props: SignInScreenProps): LayoutElement => {
       />
       <View style={styles.resetPasswordContainer}>
         <View></View>
-        <Button appearance='ghost' status='basic' onPress={navigateResetPassword}>
+        <Button
+          style={{ borderRadius: 15 }}
+          appearance='ghost'
+          status='basic'
+          onPress={navigateResetPassword}
+        >
           Olvidé mi contraseña
         </Button>
       </View>
@@ -66,23 +71,21 @@ export const SignInScreen = (props: SignInScreenProps): LayoutElement => {
         style={styles.appBar}
         source={require('../../../assets/image-background.jpeg')}
       />
-      <Layout style={[styles.formContainer, { justifyContent: 'space-between' }]}>
-        <Layout>
-          <View>
-            <Formik
-              initialValues={SignInData.empty()}
-              validationSchema={SignInSchema}
-              onSubmit={onFormSubmit}
-            >
-              {RenderForm}
-            </Formik>
-          </View>
-        </Layout>
+      <Layout style={styles.formContainer}>
+        <View>
+          <Formik
+            initialValues={SignInData.empty()}
+            validationSchema={SignInSchema}
+            onSubmit={onFormSubmit}
+          >
+            {RenderForm}
+          </Formik>
+        </View>
         <Button
-          style={styles.noAccountButton}
-          appearance='ghost'
           status='basic'
+          appearance='ghost'
           onPress={navigateSignUp}
+          style={styles.noAccountButton}
         >
           No tengo una cuenta
         </Button>
@@ -97,21 +100,28 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     flex: 1,
+    paddingTop: 25,
+    marginTop: -20,
+    borderRadius: 20,
     paddingVertical: 16,
     paddingHorizontal: 16,
+    justifyContent: 'space-between',
   },
   resetPasswordContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   formControl: {
-    marginVertical: 4,
+    borderRadius: 15,
+    marginVertical: 10,
   },
   submitButton: {
+    borderRadius: 15,
     marginVertical: 24,
   },
   noAccountButton: {
     width: '100%',
+    borderRadius: 15,
     alignSelf: 'center',
   },
 });
