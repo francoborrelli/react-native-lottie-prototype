@@ -58,7 +58,7 @@ export const WelcomePage: FC = () => {
       title: 'Te damos la bienvenida',
       animation: {
         autoPlay: true,
-        source: require('../../assets/animations/welcome.json'),
+        source: require('../../../assets/animations/welcome.json'),
       },
       text: 'Antes de empezar tenemos que configurar un par de cosas para dejar la app en funcionamiento.',
     },
@@ -70,7 +70,7 @@ export const WelcomePage: FC = () => {
       speed: !isDarkTheme ? -1 : 1,
       animation: {
         autoPlay: false,
-        source: require('../../assets/animations/darkmode.json'),
+        source: require('../../../assets/animations/darkmode.json'),
       },
       text: 'Es momento de configurar como queres usar tu aplicación',
       actions: <Toggle checked={isDarkTheme} onChange={setDarkTheme} status='warning'></Toggle>,
@@ -83,7 +83,7 @@ export const WelcomePage: FC = () => {
       text: 'Esta app utiliza la ubicación del usuario para brindar contenido.',
       animation: {
         autoPlay: true,
-        source: require('../../assets/animations/enable-gps.json'),
+        source: require('../../../assets/animations/enable-gps.json'),
       },
       actions: !hasPermission ? (
         <Button style={{ borderRadius: 20 }} onPress={requestPermission} status='danger'>
@@ -105,7 +105,7 @@ export const WelcomePage: FC = () => {
       backgroundColor: '#45425a',
       animation: {
         autoPlay: false,
-        source: require('../../assets/animations/checkDone.json'),
+        source: require('../../../assets/animations/checkDone.json'),
       },
       text: 'Hemos terminado. Ya puedes empezar a usar la aplicación',
     },

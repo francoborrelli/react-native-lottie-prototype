@@ -17,8 +17,8 @@ import {
 } from '@expo-google-fonts/dev';
 import { StatusBar } from 'expo-status-bar';
 
-import { AppNavigator } from './navigation/app.navigator';
-import { AppRoute } from './navigation/app-routes';
+import { AppNavigator } from './src/navigation/app.navigator';
+import { AppRoute } from './src/navigation/app-routes';
 
 export const App: FC = () => {
   let [fontsLoaded] = useFonts({
@@ -39,7 +39,7 @@ export const App: FC = () => {
       <StatusBar translucent />
       <IconRegistry icons={EvaIconsPack} />
 
-      <ApplicationProvider {...eva} theme={eva.dark}>
+      <ApplicationProvider {...eva} theme={eva.light}>
         <NavigationContainer>
           <AppNavigator initialRouteName={false ? AppRoute.WELCOME : AppRoute.AUTH} />
         </NavigationContainer>

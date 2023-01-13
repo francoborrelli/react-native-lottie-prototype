@@ -69,7 +69,7 @@ export const SignInScreen = (props: SignInScreenProps): LayoutElement => {
     <Layout style={{ flex: 1 }}>
       <ImageBackground
         style={styles.appBar}
-        source={require('../../../assets/image-background.jpeg')}
+        source={require('../../../../assets/image-background.jpeg')}
       />
       <Layout style={styles.formContainer}>
         <View>

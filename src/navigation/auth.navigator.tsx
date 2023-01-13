@@ -1,9 +1,10 @@
 import React from 'react';
 import { RouteProp } from '@react-navigation/core';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
+
 import { AppRoute } from './app-routes';
 import { AppNavigatorParams } from './app.navigator';
-import { SignInScreen, SignUpScreen } from '../pages/Auth';
+import { ResetPasswordScreen, SignInScreen, SignUpScreen } from '../pages/Auth';
 
 type AuthNavigatorParams = AppNavigatorParams & {
   [AppRoute.SIGN_IN]: undefined;
@@ -41,6 +42,11 @@ export const AuthNavigator = (): React.ReactElement => (
       component={SignUpScreen}
       options={{ title: 'Crear cuenta' }}
     />
-    {/* <Stack.Screen name={AppRoute.RESET_PASSWORD} component={ResetPasswordScreen} /> */}
+
+    <Stack.Screen
+      name={AppRoute.RESET_PASSWORD}
+      component={ResetPasswordScreen}
+      options={{ title: 'Olvidé mi contraseña' }}
+    />
   </Stack.Navigator>
 );

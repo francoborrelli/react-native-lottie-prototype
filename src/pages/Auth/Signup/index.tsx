@@ -44,7 +44,7 @@ export const SignUpScreen = (props: SignUpScreenProps): LayoutElement => {
     <React.Fragment>
       <ImageBackground
         style={[styles.appBar, { paddingTop: insets.top }]}
-        source={require('../../../assets/image-background.jpeg')}
+        source={require('../../../../assets/image-background.jpeg')}
       ></ImageBackground>
       <Layout style={styles.formContainer}>
         <View>
