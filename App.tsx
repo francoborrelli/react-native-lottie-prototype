@@ -23,14 +23,16 @@ import { AppNavigator } from './src/navigation/app.navigator';
 // Ducks
 import { selectTheme } from './src/store/ducks/theme';
 import store, { persistor, useReduxSelector } from './src/store';
+import { selectedWelcomeCompleted } from './src/store/ducks/welcome';
 
 const RootComponent: FC = () => {
   const theme = useReduxSelector(selectTheme);
+  const isWelcomeCompleted = useReduxSelector(selectedWelcomeCompleted);
 
   return (
     <ApplicationProvider {...eva} theme={eva[theme]}>
       <NavigationContainer>
-        <AppNavigator initialRouteName={false ? AppRoute.WELCOME : AppRoute.WELCOME} />
+        <AppNavigator initialRouteName={isWelcomeCompleted ? AppRoute.AUTH : AppRoute.WELCOME} />
       </NavigationContainer>
     </ApplicationProvider>
   );

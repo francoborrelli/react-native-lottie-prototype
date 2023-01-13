@@ -1,5 +1,5 @@
-import { Button, Toggle } from '@ui-kitten/components';
 import * as Location from 'expo-location';
+import { Button, Toggle } from '@ui-kitten/components';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { StyleSheet, View, Text, PermissionsAndroid } from 'react-native';
@@ -7,9 +7,13 @@ import { StyleSheet, View, Text, PermissionsAndroid } from 'react-native';
 import SliderOption1 from './components/SlideOption1';
 import SliderOption2 from './components/SlideOption2';
 
+// Redux
+import { setCompleted } from '../../store/ducks/welcome';
 import type { RenderItemInterface, Slide } from './types';
-import { useReduxDispatch, useReduxSelector } from '../../store';
 import { selectTheme, setTheme } from '../../store/ducks/theme';
+import { useReduxDispatch, useReduxSelector } from '../../store';
+import { useNavigation } from '@react-navigation/native';
+import { AppRoute } from '../../navigation/app-routes';
 
 const renderItem = ({ item, index }: RenderItemInterface) => {
   switch (index) {
@@ -25,6 +29,7 @@ const renderItem = ({ item, index }: RenderItemInterface) => {
 };
 
 export const WelcomePage: FC = () => {
+  const navigation = useNavigation();
   const dispatch = useReduxDispatch();
   const [step, setStep] = useState<number>(0);
   const [hasPermission, setHasPermission] = useState<boolean>(false);
@@ -37,6 +42,12 @@ export const WelcomePage: FC = () => {
     },
     [dispatch]
   );
+
+  const onDone = useCallback(() => {
+    dispatch(setCompleted());
+    // @ts-ignore
+    navigation.navigate(AppRoute.AUTH);
+  }, [dispatch, navigation]);
 
   useEffect(() => {
     const checkRequest = async () => {
@@ -101,9 +112,9 @@ export const WelcomePage: FC = () => {
           Dar permisos
         </Button>
       ) : (
-        <View style={{ borderColor: 'white', borderWidth: 1, borderRadius: 5 }}>
+        <View style={{ backgroundColor: '#ef476f', borderRadius: 8 }}>
           <Text style={[styles.message, { color: 'white', fontFamily: 'OpenSans_500Medium' }]}>
-            Parece que la app ya cuenta con los permisos necesarios.
+            Todo en orden :)
           </Text>
         </View>
       ),
@@ -127,7 +138,8 @@ export const WelcomePage: FC = () => {
   return (
     <AppIntroSlider<Slide>
       data={slides}
-      prevLabel='volver'
+      onDone={onDone}
+      prevLabel='Volver'
       nextLabel='Siguiente'
       doneLabel='Finalizar'
       renderItem={renderItem}
