@@ -1,52 +1,58 @@
 import * as eva from '@eva-design/eva';
 
+import { Provider } from 'react-redux';
+import { StatusBar } from 'expo-status-bar';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { NavigationContainer } from '@react-navigation/native';
+import { PersistGate } from 'redux-persist/es/integration/react';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 
 import type { FC } from 'react';
 
 import {
   useFonts,
-  OpenSans_300Light,
   OpenSans_500Medium,
-  OpenSans_700Bold,
   OpenSans_400Regular,
   OpenSans_800ExtraBold,
-  OpenSansCondensed_700Bold,
-} from '@expo-google-fonts/dev';
-import { StatusBar } from 'expo-status-bar';
+} from '@expo-google-fonts/open-sans';
 
-import { AppNavigator } from './src/navigation/app.navigator';
+// Navigation
 import { AppRoute } from './src/navigation/app-routes';
+import { AppNavigator } from './src/navigation/app.navigator';
+
+// Ducks
+import { selectTheme } from './src/store/ducks/theme';
+import store, { persistor, useReduxSelector } from './src/store';
+
+const RootComponent: FC = () => {
+  const theme = useReduxSelector(selectTheme);
+
+  return (
+    <ApplicationProvider {...eva} theme={eva[theme]}>
+      <NavigationContainer>
+        <AppNavigator initialRouteName={false ? AppRoute.WELCOME : AppRoute.WELCOME} />
+      </NavigationContainer>
+    </ApplicationProvider>
+  );
+};
 
 export const App: FC = () => {
   let [fontsLoaded] = useFonts({
-    OpenSans_300Light,
     OpenSans_500Medium,
-    OpenSans_700Bold,
     OpenSans_400Regular,
-    OpenSansCondensed_700Bold,
     OpenSans_800ExtraBold,
   });
 
   if (!fontsLoaded) return null;
 
   return (
-    // <Provider store={store}>
-    //   <PersistGate loading={null} persistor={persistor}>
-    <>
-      <StatusBar translucent />
-      <IconRegistry icons={EvaIconsPack} />
-
-      <ApplicationProvider {...eva} theme={eva.light}>
-        <NavigationContainer>
-          <AppNavigator initialRouteName={false ? AppRoute.WELCOME : AppRoute.AUTH} />
-        </NavigationContainer>
-      </ApplicationProvider>
-    </>
-    //</PersistGate>
-    // </Provider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <StatusBar translucent />
+        <IconRegistry icons={EvaIconsPack} />
+        <RootComponent />
+      </PersistGate>
+    </Provider>
   );
 };
 

@@ -1,14 +1,5 @@
-type THEMES = 'light' | 'dark';
+export type THEMES_TYPES = 'light' | 'dark';
 
-export enum THEME_TYPES {
-  SET_THEME = 'SET_THEME',
-}
-
-export type SET_THEME_ACTION = {
-  type: THEME_TYPES.SET_THEME;
-  theme: THEMES;
-};
-
-export type ThemeReducer = {
-  theme: THEMES;
+export type ThemeState = {
+  theme: THEMES_TYPES;
 };

@@ -8,6 +8,8 @@ import SliderOption1 from './components/SlideOption1';
 import SliderOption2 from './components/SlideOption2';
 
 import type { RenderItemInterface, Slide } from './types';
+import { useReduxDispatch, useReduxSelector } from '../../store';
+import { selectTheme, setTheme } from '../../store/ducks/theme';
 
 const renderItem = ({ item, index }: RenderItemInterface) => {
   switch (index) {
@@ -23,11 +25,18 @@ const renderItem = ({ item, index }: RenderItemInterface) => {
 };
 
 export const WelcomePage: FC = () => {
+  const dispatch = useReduxDispatch();
   const [step, setStep] = useState<number>(0);
-
-  const [isDarkTheme, setDarkTheme] = useState<boolean>(false);
-
   const [hasPermission, setHasPermission] = useState<boolean>(false);
+
+  const theme = useReduxSelector(selectTheme);
+
+  const onChangeTheme = useCallback(
+    (checked: boolean) => {
+      dispatch(setTheme(checked ? 'dark' : 'light'));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     const checkRequest = async () => {
@@ -67,13 +76,15 @@ export const WelcomePage: FC = () => {
       title: 'Modo',
       textColor: 'white',
       backgroundColor: '#7d5ba6',
-      speed: !isDarkTheme ? -1 : 1,
+      speed: theme !== 'dark' ? -1 : 1,
       animation: {
         autoPlay: false,
         source: require('../../../assets/animations/darkmode.json'),
       },
       text: 'Es momento de configurar como queres usar tu aplicación',
-      actions: <Toggle checked={isDarkTheme} onChange={setDarkTheme} status='warning'></Toggle>,
+      actions: (
+        <Toggle checked={theme === 'dark'} onChange={onChangeTheme} status='warning'></Toggle>
+      ),
     },
     {
       key: 2,
