@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "app",
-    "slug": "app",
+    "slug": "react-native-lottie",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,7 +17,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -29,6 +31,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6530c679-a1cf-41b0-834f-ddef93e0c91f"
+      }
+    },
+    "owner": "francoborrelli"
   }
 }
